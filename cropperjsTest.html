@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html crossOrigin="anonymous">
+
+
+<link  href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.1/cropper.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.1/cropper.min.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.1/cropper.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.1/cropper.js"></script>
+
+<body crossOrigin="anonymous">
+	
+	<div crossOrigin="anonymous">		
+		<img id="image" src="SivaBollineni.jpg">
+		<button onclick=cropImage()>Crop Image</button>
+		<img id="showCroppedImage" src="">
+	</div>
+
+<script>
+const image = document.getElementById('image');
+//image.crossOrigin = "Anonymous";
+	console.log("image: " + image);
+	var cropper = NaN;
+	image.onload = function(){
+	
+		cropper = new Cropper(image, {
+							aspectRatio: 0,	
+							viewMode : 0,
+							checkCrossOrigin:false,
+							crop(event) {
+								let canvas_img = window.document.querySelector('img#image.cropper-hidden');
+								console.log(canvas_img);
+								//let src = canvas_img.getAttribute('src');
+								canvas_img.setAttribute('crossorigin', 'anonymous')
+							//console.log(event);
+							//console.log("Target:" + event.target.id);
+							//console.log("Current Target:" + event.currentTarget.id);
+							//console.log(event.detail.y);
+							//console.log(event.detail.width);
+							//console.log(event.detail.height);
+							//console.log(event.detail.rotate);
+							//console.log(event.detail.scaleX);
+							//console.log(event.detail.scaleY);
+						
+						  },
+						});
+	}
+						
+	//console.log("cropper: " + cropper);
+	//croppedImage = document.getElementById('croppedImage');
+	//croppedImage.src = 
+	//img#image.cropper-hidden
+	function cropImage(){
+		var showCroppedImage = document.getElementById('showCroppedImage');
+		//showCroppedImage.src = croppedCanvas;
+		
+		var croppedCanvas = cropper.getCroppedCanvas();
+		croppedCanvas.setAttribute('crossorigin', 'anonymous')
+		console.log(croppedCanvas);
+		//croppedCanvas.crossOrigin = "anonymous";
+		var croppedImageDataURL = croppedCanvas.toDataURL('image/jpg', 1.0);
+		console.log(croppedImageDataURL);
+		//console.log("croppedImage: " + croppedImage);
+		//var showCroppedImage = document.getElementById('showCroppedImage');
+		//showCroppedImage.src = croppedImage;
+	}
+	
+</script>
+
+</body>
+</html>
